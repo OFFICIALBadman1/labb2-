@@ -24,9 +24,9 @@ import java.util.function.UnaryOperator;
 @SuppressWarnings("serial")
 public class MyArrayList<E> implements Serializable, Cloneable, Iterable<E>,
 		Collection<E>, List<E>, RandomAccess { //Typparametern <E> gör så att man kan skapa en lista av vilka typer som helst. 
-	private E[] tmp; //Data sparas internt i den generiska Arrayen tyen E, med variabel element
+	private E[] tmp; //Data sparas internt i den generiska Arrayen tyen E, med variabel element. kapaciteten på den interna arrayen. 
 
-	private int size; // Antalet element. privat variabel denns aka inte ändras på. 
+	private int size; // Antalet element. Håller reda på antalet element som faktiskt finns i listan just nu. privat variabel denns aka inte ändras på. 
 
     	// ---------------------------------------------------------------
 
@@ -39,15 +39,16 @@ public class MyArrayList<E> implements Serializable, Cloneable, Iterable<E>,
 
     	// ---------------------------------------------------------------
     
-	public MyArrayList(int initialCapacity) {
+	public MyArrayList(int initialCapacity) { // denna gör så att den som skapar en instans av MyArrayList gör att användaren själv kan ange en initial kapacitet. 
 		
-		tmp = (E[]) new Object[initialCapacity];  // skspar en referens till EMyArraylist initiala tillstånd med argumentet initialCapacity. 
-		size = 0; // börjar på storlek 0
+		tmp = (E[]) new Object[initialCapacity];  // Hur mågna element arrayen kan innehålla.  skspar en referens till EMyArraylist initiala tillstånd med argumentet initialCapacity. dvs den initiala kapaciteten. När man skapar en ny instans så kommer den 
+		// ... skapar en ny instans av MyArrayList så ska man ange storleken på arrayen. Detta gör den klassen. ett heltal (int)
+		size = 0; // Elementen börjar på 0. Hur många element listan  faktisk innehåller i början. 
 	}
 
-	public MyArrayList() {
+	public MyArrayList() { //Denna gör att användaren inte själv behöver ange någon initial kapacitet. Här dock kommer det få plats med 15 element om användaren ej anger något. 
 		/* ska implementeras */
-		this(10); 
+		this(15);  // Återanvänder koden från den första konstruktorn och ger ett heltal 15. Initierar med 15 automatiskt, om använderen ej anger kapaciteten.  denna anropar den första konstruktorn, som accepterar ett heltal som argument. om någon skaper en instans av konstruktorn, utan att specificera den itnitala storleken ex new MyArrayList(), så kommer den alltid börja med 15 element.  
 	}
 
 	// -- 1 --
